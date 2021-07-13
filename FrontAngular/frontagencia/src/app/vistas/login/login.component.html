@@ -1,0 +1,32 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+
+
+<app-header></app-header>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/loginagencia.jpg" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+      <input type="text" id="login" class="fadeIn second"  placeholder="login" formControlName="usuario">
+      <input type="password" id="password" class="fadeIn third"  placeholder="password" formControlName="password">
+      <input type="submit" class="btnSubmit" value="Log In">
+    </form>
+
+    <!-- MostrarError  -->
+    <div class="class alert-danger" *ngIf="errorStatus">
+      <p> {{errorMsj}}</p>
+    </div>
+  </div>
+</div>
+<app-footer> </app-footer>

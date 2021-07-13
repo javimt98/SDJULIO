@@ -1,0 +1,42 @@
+
+<app-header></app-header>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register-form">
+            <div class="form">
+                <div class="note">
+                    <p>Registrate en la agencia para disfrutar de las mejores ofertas.</p>
+                </div>
+
+
+                <form [formGroup]="registroForm" (ngSubmit)="registrarse(registroForm.value)">
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="email" class="form-control" placeholder="Email *" value="" formControlName="email"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="displayName" class="form-control" placeholder="Nombre de usuario *" value="" formControlName="displayName"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" id="password" class="form-control" placeholder="Contraseña *" value="" formControlName="password"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="submit" class="btnSubmit" value="Registrarse">
+                    </div>
+                </form>
+                <div class="class alert-danger" *ngIf="errorStatus">
+                    <p> {{errorMsj}}</p>
+                </div>
+            </div>
+        </div>
+
+<app-footer> </app-footer>

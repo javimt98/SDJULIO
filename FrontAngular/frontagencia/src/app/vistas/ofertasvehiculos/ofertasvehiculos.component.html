@@ -1,0 +1,87 @@
+<app-header></app-header>
+<ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+</ngb-datepicker>
+
+<ng-template #t let-date let-focused="focused">
+  <span class="custom-day"
+        [class.focused]="focused"
+        [class.range]="isRange(date)"
+        [class.faded]="isHovered(date) || isInside(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+</ng-template>
+
+<br> <br>
+<button (click)="montarinfo()" type="button" class="btn btn-primary btn-lg" >MostrarOfertas </button>
+<br><br>
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Precio/Dia</th>
+        <th scope="col">Asientos</th>
+        <th scope="col">Año</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Alquilado</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let vehiculo of vehiculos">
+        <th scope="row">{{vehiculo._id}}</th>
+        <td>{{vehiculo.brand}}</td>
+        <td>{{vehiculo.model}}</td>
+        <td>{{vehiculo.price}}</td>
+        <td>{{vehiculo.seats}}</td>
+        <td>{{vehiculo.year}}</td>
+        <td>{{vehiculo.description}}</td>
+        <td>{{vehiculo.rented}}</td>
+        <td><button (click)="redirigeareserva(vehiculo._id)" type="button" class="btn btn-secondary input-btn-block-level form-control text-center">Reservar</button></td>
+
+    </tbody>
+  </table>
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Vehiculo</th>
+        <th scope="col">Hotel</th>
+        <th scope="col">Vuelo</th>
+        <th scope="col">Precio Total</th>
+        <th scope="col">Fecha Inicio</th>
+        <th scope="col">Fecha Fin</th>
+        <th scope="col">Cancelada</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let reserva of reservas">
+        <th scope="row">{{reserva._id}}</th>
+        <td>{{reserva.fecha}}</td>
+        <td>{{reserva.vehicle}}</td>
+        <td>{{reserva.hotel}}</td>
+        <td>{{reserva.flight}}</td>
+        <td>{{reserva.precio}}</td>
+        <td>{{reserva.initdate}}</td>
+        <td>{{reserva.enddate}}</td>
+        <td>{{reserva.cancelada}}</td>
+    </tbody>
+  </table>
+
+  <!-- MostrarError  -->
+  <div class="class alert-danger" *ngIf="errorStatus">
+    <p> {{errorMsj}}</p>
+  </div>
+<hr>
+
+
+
+
+<app-footer> </app-footer>

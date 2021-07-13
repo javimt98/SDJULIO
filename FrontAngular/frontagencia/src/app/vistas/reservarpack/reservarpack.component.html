@@ -1,0 +1,181 @@
+<app-header></app-header>
+<ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+</ngb-datepicker>
+
+<ng-template #t let-date let-focused="focused">
+  <span class="custom-day"
+        [class.focused]="focused"
+        [class.range]="isRange(date)"
+        [class.faded]="isHovered(date) || isInside(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+</ng-template>
+
+<br> <br>
+<button (click)="montarinfo()" type="button" class="btn btn-primary btn-lg" >MostrarOfertas </button>
+<br><br>
+
+
+<form [formGroup]="packForm" (ngSubmit)="redirigeareserva(packForm.value)">
+
+<!--VEHICULOS-->
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Precio/Dia</th>
+        <th scope="col">Asientos</th>
+        <th scope="col">Año</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Alquilado</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let vehiculo of vehiculos">
+        <th scope="row">{{vehiculo._id}}</th>
+        <td>{{vehiculo.brand}}</td>
+        <td>{{vehiculo.model}}</td>
+        <td>{{vehiculo.price}}</td>
+        <td>{{vehiculo.seats}}</td> 
+        <td>{{vehiculo.year}}</td>
+        <td>{{vehiculo.description}}</td>
+        <td>{{vehiculo.rented}}</td>
+        
+        <td><input class="form-check-input" type="radio" name="vehiculos" id="exampleRadios1" value={{vehiculo._id}} formControlName = "idvehiculo" checked></td>
+        <label class="form-check-label" for="exampleRadios1">
+        Seleccionar
+        </label>
+    </tbody>
+</table>
+
+  <!--HOTELES-->
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Precio/Dia</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">País</th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">CodPostal</th>
+        <th scope="col">Alquilado</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let hotel of hoteles">
+        <th scope="row">{{hotel._id}}</th>
+        <td>{{hotel.nombre}}</td>
+        <td>{{hotel.type}}</td>
+        <td>{{hotel.price}}</td>
+        <td>{{hotel.telefono}}</td>
+        <td>{{hotel.direccion}}</td>
+        <td>{{hotel.pais}}</td>
+        <td>{{hotel.ciudad}}</td>
+        <td>{{hotel.codpostal}}</td>
+        <td>{{hotel.rented}}</td>
+
+        <td><input class="form-check-input" type="radio" name="hoteles" id="exampleRadios2" value={{hotel._id}} formControlName = "idhotel" checked></td>
+        <label class="form-check-label" for="exampleRadios2">
+        Seleccionar
+        </label>
+        
+    </tbody>
+</table>
+
+
+  <!--VUELOS-->
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Compañia</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Avión</th>
+        <th scope="col">Duración</th>
+        <th scope="col">Origen</th>
+        <th scope="col">Destino</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Lleno</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let vuelo of vuelos">
+        <th scope="row">{{vuelo._id}}</th>
+        <td>{{vuelo.type}}</td>
+        <td>{{vuelo.company}}</td>
+        <td>{{vuelo.price}}</td>
+        <td>{{vuelo.plane}}</td>
+        <td>{{vuelo.duration}}</td>
+        <td>{{vuelo.origin}}</td>
+        <td>{{vuelo.destiny}}</td>
+        <td>{{vuelo.description}}</td>
+        <td>{{vuelo.rented}}</td>
+
+        <td><input class="form-check-input" type="radio" name="aviones" id="exampleRadios3" value = {{vuelo._id}} formControlName = "idvuelo" checked></td>
+        <label class="form-check-label" for="exampleRadios3">
+        Seleccionar
+        </label>
+       
+    </tbody>
+</table>
+<input type="submit" class="btnSubmit" value="Reservar">
+</form>
+
+ <!-- <button (click)="redirigeareserva(vehiculo._id, hotel._id, vuelo._id)" type="button" class="btn btn-primary input-btn-block-level form-control text-center">Reservar</button>-->
+
+
+
+  <br><br><br><br><br>
+
+  <!--RESERVAS-->
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Vehiculo</th>
+        <th scope="col">Hotel</th>
+        <th scope="col">Vuelo</th>
+        <th scope="col">Precio Total</th>
+        <th scope="col">Fecha Inicio</th>
+        <th scope="col">Fecha Fin</th>
+        <th scope="col">Cancelada</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let reserva of reservas">
+        <th scope="row">{{reserva._id}}</th>
+        <td>{{reserva.fecha}}</td>
+        <td>{{reserva.vehicle}}</td>
+        <td>{{reserva.hotel}}</td>
+        <td>{{reserva.flight}}</td>
+        <td>{{reserva.precio}}</td>
+        <td>{{reserva.initdate}}</td>
+        <td>{{reserva.enddate}}</td>
+        <td>{{reserva.cancelada}}</td>
+    </tbody>
+</table>
+
+  <!-- MostrarError  -->
+  <div class="class alert-danger" *ngIf="errorStatus">
+    <p> {{errorMsj}}</p>
+  </div>
+<hr>
+
+
+
+
+<app-footer> </app-footer>

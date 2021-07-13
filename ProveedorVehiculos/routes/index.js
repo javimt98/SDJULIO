@@ -20,16 +20,16 @@ api.put('/vehicle/:vehicleId', vehicleCtrl.updateVehicle)
 api.delete('/vehicle/:vehicleId', vehicleCtrl.deleteVehicle)
 
 //HACER RESERVA
-api.put('/vehicle/hacerreserva/:vehicleId/:initdate/:enddate', vehicleCtrl.initRent)
+api.put('/vehicle/initrent/:vehicleId/:initdate/:enddate', vehicleCtrl.initRent)
 
 //CANCELAR RESERVA
-api.put('/vehicle/cancelarreserva/:vehicleId', vehicleCtrl.cancelRent)
+api.put('/vehicle/cancelrent/:vehicleId', vehicleCtrl.cancelRent)
 
 //DEVUELVE EN UN ARRAY DE JSON LAS OFERTAS FILTRADAS
-api.get('/vehicles/filtrarofertas/:initdate/:enddate', vehicleCtrl.filterOffers)
+api.get('/vehicle/filtrarofertas/:initdate/:enddate', vehicleCtrl.filterOffers)
 
 //PRECIO DEL VEHICULO EN LAS FECHAS PASADAS COMO PARAMETRO
-api.get('/vehicles/preciovehiculo/:vehicleId:/:initdate/:enddate', vehicleCtrl.rentPrice)
+api.get('/vehicle/precio/:vehicleId/:initdate/:enddate', vehicleCtrl.rentPrice)
 
 
 module.exports = api

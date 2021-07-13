@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+
+
+<br><br><br>
+    <!-- Login Form -->
+    <form [formGroup]="cancelForm" (ngSubmit)="cancel(cancelForm.value)">
+      <input type="text" id="idreserva" class="fadeIn second"  placeholder="ID Reserva" formControlName="idreserva">
+      <input type="submit" class="btnSubmit" value="Cancelar">
+    </form>
+
+<br>
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Vehiculo</th>
+        <th scope="col">Hotel</th>
+        <th scope="col">Vuelo</th>
+        <th scope="col">Precio Total</th>
+        <th scope="col">Fecha Inicio</th>
+        <th scope="col">Fecha Fin</th>
+        <th scope="col">Cancelada</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let reserva of reservas">
+        <th scope="row">{{reserva._id}}</th>
+        <td>{{reserva.fecha}}</td>
+        <td>{{reserva.vehicle}}</td>
+        <td>{{reserva.hotel}}</td>
+        <td>{{reserva.flight}}</td>
+        <td>{{reserva.precio}}</td>
+        <td>{{reserva.initdate}}</td>
+        <td>{{reserva.enddate}}</td>
+        <td>{{reserva.cancelada}}</td>
+    </tbody>
+  </table>
+
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<app-footer> </app-footer>

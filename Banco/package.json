@@ -1,0 +1,24 @@
+{
+  "name": "banco",
+  "version": "1.0.0",
+  "description": "Banco de la app conexion con Socket TCP",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node seeder.js"
+  },
+  "author": "Javier Martinez Molina",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.14",
+    "mongoose-seed": "^0.6.0",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
