@@ -6,12 +6,18 @@ const util = require('util')
 var dateFormat = require('dateformat')
 
 
+
+const ipvehiculos = "172.20.42.7"
+const iphoteles = "172.20.42.6"
+const ipvuelos = "172.20.42.6"
+
+
 //PROVEEDOR DE VEHICULOS
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 function getAllVehicles(req, res)
 {
-    request.get("https://localhost:3005/api/vehicle", (err, response, body) =>
+    request.get(`https://${ipvehiculos}:3005/api/vehicle`, (err, response, body) =>
     {
         if (err) return res.status(500).send({message: `Error al contactar con el proveedor de vehiculos: ${err}`})
         var datos = JSON.parse(body)
@@ -27,7 +33,7 @@ function getVehicle(req, res)
     request.get
     ({
         "headers": { "content-type": "application/json" },
-        "url": `https://localhost:3005/api/vehicle/${vehicleId}`,
+        "url": `https://${ipvehiculos}:3005/api/vehicle/${vehicleId}`,
     }, 
     
     (err, response, body) => 
@@ -49,7 +55,7 @@ async function offersVehicles(req, res)
     let enddate = req.params.enddateId
 
 
-    const url = `https://localhost:3005/api/vehicle/filtrarofertas/${initdate}/${enddate}`
+    const url = `https://${ipvehiculos}:3005/api/vehicle/filtrarofertas/${initdate}/${enddate}`
 
     
     const requestPromise = util.promisify(request);
@@ -71,7 +77,7 @@ async function priceoftheVehicle(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3005/api/vehicle/precio/${vehicleId}/${date1}/${date2}`
+    const url = `https://${ipvehiculos}:3005/api/vehicle/precio/${vehicleId}/${date1}/${date2}`
     const requestPromise = util.promisify(request);
     const response = await requestPromise(url);
     const respu = JSON.parse(response.body)
@@ -91,7 +97,7 @@ async function hacerReservaVehiculo(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3005/api/vehicle/initrent/${vehicleId}/${date1}/${date2}`
+    const url = `https://${ipvehiculos}:3005/api/vehicle/initrent/${vehicleId}/${date1}/${date2}`
 
     const requestPromise = util.promisify(request.put);
     const response = await requestPromise(url);
@@ -114,7 +120,7 @@ async function cancelarReservaVehiculo(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3005/api/vehicle/cancelrent/${vehicleId}`
+    const url = `https://${ipvehiculos}:3005/api/vehicle/cancelrent/${vehicleId}`
 
     const requestPromise = util.promisify(request.put);
     const response = await requestPromise(url);
@@ -134,7 +140,7 @@ async function cancelarReservaVehiculo(req, res)
 ////////////////////////////////////////////////////////////////////////////////////////////
 function getAllHotels(req, res)
 {
-    request.get("https://localhost:3006/api/hotel", (err, response, body) =>
+    request.get(`https://${iphoteles}:3006/api/hotel`, (err, response, body) =>
     {
         if (err) return res.status(500).send({message: `Error al contactar con el proveedor de hoteles: ${err}`})
         var datos = JSON.parse(body)
@@ -150,7 +156,7 @@ function getHotel(req, res)
     request.get(
     {
         "headers": { "content-type": "application/json" },
-        "url": `https://localhost:3006/api/hotel/${hotelId}`,
+        "url": `https://${iphoteles}:3006/api/hotel/${hotelId}`,
     }, 
     
     (err, response, body) => 
@@ -171,7 +177,7 @@ async function offersHotels(req, res)
     let initdate = req.params.initdateId
     let enddate = req.params.enddateId
 
-    const url = `https://localhost:3006/api/hotel/filtrarofertas/${initdate}/${enddate}`
+    const url = `https://${iphoteles}:3006/api/hotel/filtrarofertas/${initdate}/${enddate}`
     const requestPromise = util.promisify(request);
     const response = await requestPromise(url);
     const respu = JSON.parse(response.body)
@@ -191,7 +197,7 @@ async function priceoftheHotel(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3006/api/hotel/precio/${hotelId}/${date1}/${date2}`
+    const url = `https://${iphoteles}:3006/api/hotel/precio/${hotelId}/${date1}/${date2}`
     const requestPromise = util.promisify(request);
     const response = await requestPromise(url);
     const respu = JSON.parse(response.body)
@@ -211,7 +217,7 @@ async function hacerReservaHotel(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3006/api/hotel/initrent/${hotelId}/${date1}/${date2}`
+    const url = `https://${iphoteles}:3006/api/hotel/initrent/${hotelId}/${date1}/${date2}`
 
     const requestPromise = util.promisify(request.put);
     const response = await requestPromise(url);
@@ -232,7 +238,7 @@ async function cancelarReservaHotel(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3006/api/hotel/cancelrent/${hotelId}`
+    const url = `https://${iphoteles}:3006/api/hotel/cancelrent/${hotelId}`
 
     const requestPromise = util.promisify(request.put);
     const response = await requestPromise(url);
@@ -247,7 +253,7 @@ async function cancelarReservaHotel(req, res)
 ////////////////////////////////////////////////////////////////////////////////////////////
 function getAllFlights(req, res)
 {
-    request.get("https://localhost:3007/api/flight", (err, response, body) =>
+    request.get(`https://${ipvuelos}:3007/api/flight`, (err, response, body) =>
     {
         if (err) return res.status(500).send({message: `Error al contactar con el proveedor de vuelos: ${err}`})
         var datos = JSON.parse(body)
@@ -263,7 +269,7 @@ function getFlight(req, res)
     request.get(
     {
         "headers": { "content-type": "application/json" },
-        "url": `https://localhost:3007/api/flight/${flightId}`,
+        "url": `https://${ipvuelos}:3007/api/flight/${flightId}`,
     }, 
     
     (err, response, body) => 
@@ -284,7 +290,7 @@ async function offersFlights(req, res)
     let initdate = req.params.initdateId
     let enddate = req.params.enddateId
 
-    const url = `https://localhost:3007/api/flight/filtrarofertas/${initdate}/${enddate}`
+    const url = `https://${ipvuelos}:3007/api/flight/filtrarofertas/${initdate}/${enddate}`
     const requestPromise = util.promisify(request);
     const response = await requestPromise(url);
     const respu = JSON.parse(response.body)
@@ -300,7 +306,7 @@ function priceoftheFlight(req, res)
     request.get(
     {
         "headers": { "content-type": "application/json" },
-        "url": `https://localhost:3007/api/flight/price/${flightId}`,
+        "url": `https://${ipvuelos}:3007/api/flight/price/${flightId}`,
     }, 
     
     (err, response, body) => 
@@ -322,7 +328,7 @@ async function hacerReservaVuelo(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3007/api/flight/initrent/${flightId}/${date1}/${date2}`
+    const url = `https://${ipvuelos}:3007/api/flight/initrent/${flightId}/${date1}/${date2}`
 
     const requestPromise = util.promisify(request.put);
     const response = await requestPromise(url);
@@ -343,7 +349,7 @@ async function cancelarReservaVuelo(req, res)
     date1.toString()
     date2.toString()
 
-    const url = `https://localhost:3007/api/flight/cancelrent/${flightId}`
+    const url = `https://${ipvuelos}:3007/api/flight/cancelrent/${flightId}`
 
     const requestPromise = util.promisify(request.put);
     const response = await requestPromise(url);
