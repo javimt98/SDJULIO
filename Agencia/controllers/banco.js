@@ -10,7 +10,7 @@ function hayDineroTarjeta(req, res)
     const options = 
     {
         port: 3001,
-        host:'localhost'
+        host:'172.20.42.7'
     }
 
     const client = net.createConnection(options)
