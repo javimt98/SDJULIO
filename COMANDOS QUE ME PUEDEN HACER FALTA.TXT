@@ -10,7 +10,9 @@ PARA GESTIONAR LA VERSION DE ANGULAR
 ///////////////////////////////////////////777
 
 INSTALAR NVM 
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
+
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.35.2/install.sh | bash
+///curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
 
 npm i nvm
 
